@@ -19,7 +19,7 @@ The objective is to score as many points as possible trying to maintain the ball
   - Github: [Bullseye14](https://github.com/Bullseye14)
   
 * Xavi Marín
-  - Github [Xavimarin35](https://github.com/xavimarin35)
+  - Github: [Xavimarin35](https://github.com/xavimarin35)
   
 * Group's Github link
   - [Pinball 2D](https://github.com/xavimarin35/Pinball2D_Physics)
