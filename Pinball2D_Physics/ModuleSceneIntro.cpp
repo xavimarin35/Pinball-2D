@@ -227,6 +227,15 @@ bool ModuleSceneIntro::Start()
 	440, 777
 	};
 
+	mapshapes.add(App->physics->CreateChain(0, 0, pinball_externalshape, 92, b2_staticBody));
+	mapshapes.add(App->physics->CreateChain(0, 0, leftdown_obstacle, 12, b2_staticBody));
+	mapshapes.add(App->physics->CreateChain(0, 0, leftdown_bouncer, 16, b2_staticBody));
+	mapshapes.add(App->physics->CreateChain(0, 0, rightdown_obstacle, 56, b2_staticBody));
+	mapshapes.add(App->physics->CreateChain(0, 0, rightdown_bouncer, 18, b2_staticBody));
+	mapshapes.add(App->physics->CreateChain(0, 0, lefttop_path, 48, b2_staticBody));
+	mapshapes.add(App->physics->CreateChain(0, 0, top_path, 94, b2_staticBody));
+	mapshapes.add(App->physics->CreateChain(0, 0, rocket_launcher, 10, b2_staticBody));
+
 	return ret;
 }
 
@@ -241,12 +250,7 @@ bool ModuleSceneIntro::CleanUp()
 // Update: draw background
 update_status ModuleSceneIntro::Update()
 {
-	if(App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
-	{
-		circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 25));
-		circles.getLast()->data->listener = this;
-	}
-
+	
 	if(App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
 	{
 		boxes.add(App->physics->CreateRectangle(App->input->GetMouseX(), App->input->GetMouseY(), 100, 50));
@@ -290,7 +294,7 @@ update_status ModuleSceneIntro::Update()
 			30, 62
 		};
 
-		ricks.add(App->physics->CreateChain(App->input->GetMouseX(), App->input->GetMouseY(), rick_head, 64));
+		//ricks.add(App->physics->CreateChain(App->input->GetMouseX(), App->input->GetMouseY(), rick_head, 64));
 	}
 
 	// Prepare for raycast ------------------------------------------------------
@@ -300,7 +304,7 @@ update_status ModuleSceneIntro::Update()
 	mouse.y = App->input->GetMouseY();
 
 	// All draw functions ------------------------------------------------------
-	p2List_item<PhysBody*>* c = circles.getFirst();
+	/*p2List_item<PhysBody*>* c = circles.getFirst();
 
 	while(c != NULL)
 	{
@@ -328,7 +332,9 @@ update_status ModuleSceneIntro::Update()
 		c->data->GetPosition(x, y);
 		App->renderer->Blit(rick, x, y, NULL, 1.0f, c->data->GetRotation());
 		c = c->next;
-	}
+	}*/
+
+	App->renderer->Blit(map, 0, 0);
 
 	return UPDATE_CONTINUE;
 }

@@ -8,7 +8,11 @@ class PhysBody;
 
 // structs of all components of the pinball (flippers, launchers...etc)
 
-
+struct light {
+	PhysBody* sensor = nullptr;
+	bool working = false;
+	SDL_Texture* light_tex = nullptr;
+};
 class ModuleSceneIntro : public Module
 {
 public:
@@ -23,7 +27,7 @@ public:
 	// void Reset(); //A function to reset everything and start again must be here
 
 public:
-	p2List<PhysBody*> circles;
+	p2List<PhysBody*> mapshapes;
 	p2List<PhysBody*> boxes;
 	p2List<PhysBody*> ricks;
 
