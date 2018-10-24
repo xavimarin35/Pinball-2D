@@ -30,7 +30,7 @@ bool ModulePlayer::Start()
 	score = 0;
 	highest_score = 0;
 
-	
+	ball = App->physics->CreateCircle(SCREEN_WIDTH - 32, SCREEN_HEIGHT - 600, 12);
 
 	return true;
 }
@@ -50,6 +50,21 @@ bool ModulePlayer::CleanUp()
 // Update: draw background
 update_status ModulePlayer::Update()
 {
+
+	if (ball != nullptr) {
+
+		int ballpos_x;
+		int ballpos_y;
+		
+		ball->GetPosition(ballpos_x, ballpos_y);
+		App->renderer->Blit(ball_tex, ballpos_x, ballpos_y, NULL);
+	}
+
+	// funtion of highscore
+	if (score > highest_score) {
+		highest_score = score;
+	}
+
 	return UPDATE_CONTINUE;
 }
 
