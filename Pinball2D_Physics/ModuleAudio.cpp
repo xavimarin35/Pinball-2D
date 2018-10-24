@@ -44,6 +44,15 @@ bool ModuleAudio::Init()
 		ret = true;
 	}
 
+	ball_falls = LoadFx("assets/fx/Ball_Falls.wav");
+	red_circle = LoadFx("assets/fx/Red_Circle.wav");
+	green_circle = LoadFx("assets/fx/Green_Circle.wav");
+	coin = LoadFx("assets/fx/Coin.wav");
+	restart = LoadFx("assets/fx/Restart.wav");
+	start = LoadFx("assets/fx/Start.wav");
+
+	PlayMusic("assets/music/music.ogg");
+
 	return ret;
 }
 

@@ -25,6 +25,8 @@ public:
 	// Play a previously loaded WAV
 	bool PlayFx(unsigned int fx, int repeat = 0);
 
+	int ball_falls, coin, green_circle, red_circle, restart, start;
+
 private:
 
 	Mix_Music*			music;
