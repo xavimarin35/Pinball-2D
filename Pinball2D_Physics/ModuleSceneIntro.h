@@ -27,8 +27,11 @@ public:
 	p2List<PhysBody*> boxes;
 	p2List<PhysBody*> ricks;
 
-	SDL_Texture* circle;
-	SDL_Texture* box;
-	SDL_Texture* rick;
+	SDL_Texture* map;
+	SDL_Texture* red_light;
+	SDL_Texture* green_light;
+
+
 	uint bonus_fx;
+	uint music;
 };

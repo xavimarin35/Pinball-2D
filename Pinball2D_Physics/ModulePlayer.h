@@ -20,5 +20,13 @@ public:
 	//void OnCollision(PhysBody* bodyA, PhysBody* bodyB); 
 
 public:
+	PhysBody* ball;
+
+	SDL_Texture* ball_tex;
+
+	int score;
+	int lifes;
+	int highest_score;
+	bool dead;
 
 };

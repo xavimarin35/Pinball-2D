@@ -9,7 +9,7 @@
 
 ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
-	circle = box = rick = NULL;
+	map = NULL;
 }
 
 ModuleSceneIntro::~ModuleSceneIntro()
@@ -23,9 +23,9 @@ bool ModuleSceneIntro::Start()
 
 	App->renderer->camera.x = App->renderer->camera.y = 0;
 
-	circle = App->textures->Load("pinball/wheel.png"); 
-	box = App->textures->Load("pinball/crate.png");
-	rick = App->textures->Load("pinball/rick_head.png");
+	map = App->textures->Load("assets/textures/background.png"); 
+	red_light = App->textures->Load("assets/textures/Red.png");
+	green_light = App->textures->Load("assets/textures/Green.png");
 	bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
 
 	return ret;
