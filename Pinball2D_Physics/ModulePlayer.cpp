@@ -42,6 +42,8 @@ bool ModulePlayer::CleanUp()
 
 	App->textures->Unload(ball_tex);
 
+
+
 	return true;
 }
 
