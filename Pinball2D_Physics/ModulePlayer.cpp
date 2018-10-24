@@ -71,14 +71,13 @@ update_status ModulePlayer::Update()
 		if (lifes <= 0) 
 		{
 			App->scene_intro->restart = true;
+
 		}
 		else {
 			App->audio->PlayFx(App->audio->ball_falls, 0);
 		}
 		
 	}
-
-
 
 	if (ball != nullptr) {
 
