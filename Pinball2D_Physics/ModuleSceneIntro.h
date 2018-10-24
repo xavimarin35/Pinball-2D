@@ -24,7 +24,7 @@ public:
 	bool CleanUp();
 	void OnCollision(PhysBody* bodyA, PhysBody* bodyB);
 
-	// void Reset(); //A function to reset everything and start again must be here
+	void restartGame(); //A function to reset everything and start again must be here
 
 public:
 	p2List<PhysBody*> mapshapes;
@@ -35,6 +35,9 @@ public:
 	SDL_Texture* red_light;
 	SDL_Texture* green_light;
 
+	bool restart;
+
+	
 
 	uint bonus_fx;
 	uint music;

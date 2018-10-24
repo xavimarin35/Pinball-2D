@@ -2,6 +2,7 @@
 
 #include "p2List.h"
 #include "Globals.h"
+#include "p2SString.h"
 
 class Module;
 class ModuleRender;

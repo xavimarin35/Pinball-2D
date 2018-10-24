@@ -27,6 +27,9 @@ public:
 	int score;
 	int lifes;
 	int highest_score;
-	bool dead;
+	bool finished_ball;
+
+	int initialBallPosition_x;
+	int initialBallPosition_y;
 
 };

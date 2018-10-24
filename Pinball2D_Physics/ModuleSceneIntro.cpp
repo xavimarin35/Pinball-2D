@@ -6,6 +6,7 @@
 #include "ModuleTextures.h"
 #include "ModuleAudio.h"
 #include "ModulePhysics.h"
+#include "ModulePlayer.h"
 
 ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -227,6 +228,9 @@ bool ModuleSceneIntro::Start()
 	440, 777
 	};
 
+	restart = false;
+
+	//creating map shapes
 	mapshapes.add(App->physics->CreateChain(0, 0, pinball_externalshape, 92, b2_staticBody));
 	mapshapes.add(App->physics->CreateChain(0, 0, leftdown_obstacle, 12, b2_staticBody));
 	mapshapes.add(App->physics->CreateChain(0, 0, leftdown_bouncer, 16, b2_staticBody));
@@ -336,10 +340,36 @@ update_status ModuleSceneIntro::Update()
 
 	App->renderer->Blit(map, 0, 0);
 
+
+	// restart game
+	if (restart == true)
+	{
+		restartGame();
+	}
+
 	return UPDATE_CONTINUE;
 }
 
 void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
 	App->audio->PlayFx(bonus_fx);
+}
+
+void ModuleSceneIntro::restartGame() {
+
+	//banner
+	//scene of the map Unload
+	//scene of the banner Load
+
+
+	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+	{
+		App->audio->PlayFx(App->audio->restart);
+
+		App->player->lifes = 4;
+		App->player->score = 0;
+
+		restart = false;
+
+	}
 }
