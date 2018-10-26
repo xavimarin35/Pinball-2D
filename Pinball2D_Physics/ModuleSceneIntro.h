@@ -32,17 +32,22 @@ public:
 	p2List<PhysBody*> boxes;
 	p2List<PhysBody*> ricks;
 
+	PhysBody* leftflipper;
+	PhysBody* rightflipper;
+	PhysBody* leftflipper_joint;
+	PhysBody* rightflipper_joint;
+
 	SDL_Texture* map;
 	SDL_Texture* red_light_tex;
 	SDL_Texture* green_light_tex;
 	SDL_Texture* leftflipper_tex;
 	SDL_Texture* rightflipper_tex;
+	SDL_Texture* leftflippersmall_tex;
+	SDL_Texture* rightflippersmall_tex;
 	SDL_Texture* coin_tex;
-
-
-	bool restart;
-
 	
+	
+	bool restart;
 
 	uint bonus_fx;
 	uint music;

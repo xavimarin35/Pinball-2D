@@ -34,7 +34,7 @@ bool ModulePlayer::Start()
 	initialBallPosition_x = SCREEN_WIDTH - 32;
 	initialBallPosition_y = SCREEN_HEIGHT - 600;
 
-	ball = App->physics->CreateCircle(initialBallPosition_x, initialBallPosition_y, 12);
+	ball = App->physics->CreateCircle(initialBallPosition_x, initialBallPosition_y, 12, b2_dynamicBody);
 
 	return true;
 }
@@ -54,7 +54,14 @@ bool ModulePlayer::CleanUp()
 // Update: draw background
 update_status ModulePlayer::Update()
 {
-	//+ debug function
+	// Controlling the game 
+	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN)
+	{
+		App->scene_intro->leftflipper->body->ApplyAngularImpulse(-3.0f, true);
+	}
+
+
+	// Reappearing Code
 	if (/*App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN ||*/ finished_ball == true )
 	{
 		if (ball != nullptr) {
@@ -63,7 +70,7 @@ update_status ModulePlayer::Update()
 		}
 
 		// Appears the new ball
-		ball = App->physics->CreateCircle(initialBallPosition_x, initialBallPosition_y, 12);
+		ball = App->physics->CreateCircle(initialBallPosition_x, initialBallPosition_y, 12, b2_dynamicBody);
 		finished_ball = false;
 		lifes--;
 

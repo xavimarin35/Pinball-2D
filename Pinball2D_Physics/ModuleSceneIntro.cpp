@@ -27,7 +27,16 @@ bool ModuleSceneIntro::Start()
 	map = App->textures->Load("assets/textures/background.png"); 
 	red_light_tex = App->textures->Load("assets/textures/Red.png");
 	green_light_tex = App->textures->Load("assets/textures/Green.png");
+	leftflipper_tex = App->textures->Load("assets/textures/Flipper_LeftBig.png");
+	rightflipper_tex = App->textures->Load("assets/textures/Flipper_RightBig.png");
+	leftflippersmall_tex = App->textures->Load("assets/textures/Flipper_LeftSmall.png");
+	rightflippersmall_tex = App->textures->Load("assets/textures/Flipper_RightSmall.png");
 	bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
+
+	b2RevoluteJointDef jointDef_1;
+	b2RevoluteJointDef jointDef_2;
+	b2RevoluteJoint* joint_1;
+	b2RevoluteJoint* joint_2;
 
 
 	// Shapes extracted from Ric's Shapes Creator!!
@@ -240,6 +249,27 @@ bool ModuleSceneIntro::Start()
 	mapshapes.add(App->physics->CreateChain(0, 0, top_path, 94, b2_staticBody));
 	mapshapes.add(App->physics->CreateChain(0, 0, rocket_launcher, 10, b2_staticBody));
 
+	// Flippers stuff
+	rightflipper = App->physics->CreateRectangle(200, 622, 70, 15, b2_dynamicBody);
+	leftflipper = App->physics->CreateRectangle(195, 790, 70, 15, b2_dynamicBody);
+
+	rightflipper_joint = App->physics->CreateCircle(205, 622, 5, b2_staticBody);
+	leftflipper_joint = App->physics->CreateCircle(145+19, 786+4, 5, b2_staticBody);
+	
+	jointDef_1.Initialize(leftflipper->body, leftflipper_joint->body, leftflipper_joint->body->GetWorldCenter());
+	jointDef_2.Initialize(rightflipper_joint->body, rightflipper->body, rightflipper_joint->body->GetWorldCenter());
+
+	jointDef_1.lowerAngle = -0.5f * b2_pi;
+	jointDef_1.upperAngle = 0.25f * b2_pi;
+	jointDef_2.lowerAngle = -0.5f * b2_pi;
+	jointDef_2.upperAngle = 0.25f * b2_pi;
+
+	jointDef_1.enableLimit = true;
+	jointDef_2.enableLimit = true;
+
+	joint_1 = (b2RevoluteJoint*)App->physics->world->CreateJoint(&jointDef_1);
+	joint_2 = (b2RevoluteJoint*)App->physics->world->CreateJoint(&jointDef_2);
+
 	return ret;
 }
 
@@ -247,6 +277,9 @@ bool ModuleSceneIntro::Start()
 bool ModuleSceneIntro::CleanUp()
 {
 	LOG("Unloading Intro scene");
+
+	//(b2RevoluteJoint*)App->physics->world->DestroyJoint(&jointDef_1);
+	//(b2RevoluteJoint*)App->physics->world->DestroyJoint(&jointDef_2);
 
 	return true;
 }
@@ -257,11 +290,11 @@ update_status ModuleSceneIntro::Update()
 	
 	if(App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
 	{
-		boxes.add(App->physics->CreateRectangle(App->input->GetMouseX(), App->input->GetMouseY(), 100, 50));
+		boxes.add(App->physics->CreateRectangle(App->input->GetMouseX(), App->input->GetMouseY(), 100, 50, b2_dynamicBody));
 	}
 
-	
-
+	//Blit map
+	App->renderer->Blit(map, 0, 0);
 	
 
 	// Prepare for raycast ------------------------------------------------------
@@ -271,10 +304,22 @@ update_status ModuleSceneIntro::Update()
 	mouse.y = App->input->GetMouseY();
 
 	// All draw functions ------------------------------------------------------
-	
+	if (leftflipper != NULL)
+	{
+		int x, y;
+		leftflipper->GetPosition(x, y);
+		App->renderer->Blit(leftflipper_tex, x, y, NULL, 1.0f, leftflipper->GetRotation());
+	}
 
 
-	App->renderer->Blit(map, 0, 0);
+	if (rightflipper != NULL)
+	{
+		int x, y;
+		rightflipper->GetPosition(x, y);
+		App->renderer->Blit(rightflipper_tex, x, y, NULL, 1.0f, rightflipper->GetRotation());
+	}
+
+
 
 
 	// restart game
