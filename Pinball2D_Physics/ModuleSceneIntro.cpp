@@ -25,8 +25,8 @@ bool ModuleSceneIntro::Start()
 	App->renderer->camera.x = App->renderer->camera.y = 0;
 
 	map = App->textures->Load("assets/textures/background.png"); 
-	red_light = App->textures->Load("assets/textures/Red.png");
-	green_light = App->textures->Load("assets/textures/Green.png");
+	red_light_tex = App->textures->Load("assets/textures/Red.png");
+	green_light_tex = App->textures->Load("assets/textures/Green.png");
 	bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
 
 
@@ -262,7 +262,7 @@ update_status ModuleSceneIntro::Update()
 
 	
 
-	}
+	
 
 	// Prepare for raycast ------------------------------------------------------
 	
