@@ -250,11 +250,11 @@ bool ModuleSceneIntro::Start()
 	mapshapes.add(App->physics->CreateChain(0, 0, rocket_launcher, 10, b2_staticBody));
 
 	// Flippers stuff
-	rightflipper = App->physics->CreateRectangle(200, 622, 70, 15, b2_dynamicBody);
-	leftflipper = App->physics->CreateRectangle(195, 790, 70, 15, b2_dynamicBody);
+	rightflipper = App->physics->CreateRectangle(250, 622, 70, 15, b2_dynamicBody);
+	leftflipper = App->physics->CreateRectangle(210, 540, 70, 15, b2_dynamicBody);
 
 	rightflipper_joint = App->physics->CreateCircle(205, 622, 5, b2_staticBody);
-	leftflipper_joint = App->physics->CreateCircle(145+19, 786+4, 5, b2_staticBody);
+	leftflipper_joint = App->physics->CreateCircle(145+19, 550, 5, b2_staticBody);
 	
 	jointDef_1.Initialize(leftflipper->body, leftflipper_joint->body, leftflipper_joint->body->GetWorldCenter());
 	jointDef_2.Initialize(rightflipper_joint->body, rightflipper->body, rightflipper_joint->body->GetWorldCenter());

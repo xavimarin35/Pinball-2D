@@ -55,11 +55,10 @@ bool ModulePlayer::CleanUp()
 update_status ModulePlayer::Update()
 {
 	// Controlling the game 
-	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN)
+	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
 	{
-		App->scene_intro->leftflipper->body->ApplyAngularImpulse(-3.0f, true);
+		App->scene_intro->leftflipper->body->ApplyAngularImpulse(-2.0f, true);
 	}
-
 
 	// Reappearing Code
 	if (/*App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN ||*/ finished_ball == true )
