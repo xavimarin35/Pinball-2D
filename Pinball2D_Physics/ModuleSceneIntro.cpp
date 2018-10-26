@@ -287,16 +287,9 @@ bool ModuleSceneIntro::CleanUp()
 // Update: draw background
 update_status ModuleSceneIntro::Update()
 {
-	
-	if(App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
-	{
-		boxes.add(App->physics->CreateRectangle(App->input->GetMouseX(), App->input->GetMouseY(), 100, 50, b2_dynamicBody));
-	}
-
 	//Blit map
 	App->renderer->Blit(map, 0, 0);
 	
-
 	// Prepare for raycast ------------------------------------------------------
 	
 	iPoint mouse;
@@ -310,17 +303,13 @@ update_status ModuleSceneIntro::Update()
 		leftflipper->GetPosition(x, y);
 		App->renderer->Blit(leftflipper_tex, x, y, NULL, 1.0f, leftflipper->GetRotation());
 	}
-
-
+	
 	if (rightflipper != NULL)
 	{
 		int x, y;
 		rightflipper->GetPosition(x, y);
 		App->renderer->Blit(rightflipper_tex, x, y, NULL, 1.0f, rightflipper->GetRotation());
 	}
-
-
-
 
 	// restart game
 	if (restart == true)
@@ -343,7 +332,7 @@ void ModuleSceneIntro::restartGame() {
 	//scene of the banner Load
 
 
-	if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+	/*if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)*/
 	{
 		App->audio->PlayFx(App->audio->restart);
 

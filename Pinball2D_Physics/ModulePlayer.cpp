@@ -31,7 +31,7 @@ bool ModulePlayer::Start()
 	score = 0;
 	highest_score = 0;
 
-	initialBallPosition_x = SCREEN_WIDTH - 32;
+	initialBallPosition_x = SCREEN_WIDTH - 300;
 	initialBallPosition_y = SCREEN_HEIGHT - 600;
 
 	ball = App->physics->CreateCircle(initialBallPosition_x, initialBallPosition_y, 12, b2_dynamicBody);
@@ -54,6 +54,17 @@ bool ModulePlayer::CleanUp()
 // Update: draw background
 update_status ModulePlayer::Update()
 {
+	if (ball != nullptr) {
+
+		int ballpos_x;
+		int ballpos_y;
+
+		ball->GetPosition(ballpos_x, ballpos_y);
+		App->renderer->Blit(ball_tex, ballpos_x, ballpos_y, NULL);
+
+		if (ballpos_y > SCREEN_HEIGHT) { finished_ball = true; }
+	}
+
 	// Controlling the game 
 	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
 	{
@@ -61,7 +72,7 @@ update_status ModulePlayer::Update()
 	}
 
 	// Reappearing Code
-	if (/*App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN ||*/ finished_ball == true )
+	if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN || finished_ball == true )
 	{
 		if (ball != nullptr) {
 			ball->body->GetWorld()->DestroyBody(ball->body);
@@ -74,7 +85,7 @@ update_status ModulePlayer::Update()
 		lifes--;
 
 		// games has finished completely
-		if (lifes <= 0) 
+		if (lifes < 0) 
 		{
 			App->scene_intro->restart = true;
 
@@ -84,18 +95,6 @@ update_status ModulePlayer::Update()
 		}
 		
 	}
-
-	if (ball != nullptr) {
-
-		int ballpos_x;
-		int ballpos_y;
-		
-		ball->GetPosition(ballpos_x, ballpos_y);
-		App->renderer->Blit(ball_tex, ballpos_x, ballpos_y, NULL);
-	}
-
-	
-
 	
 	// funtion of highscore
 	if (score > highest_score) {
