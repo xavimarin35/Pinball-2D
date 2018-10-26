@@ -3,6 +3,7 @@
 #include "p2List.h"
 #include "p2Point.h"
 #include "Globals.h"
+#include "Animation.h"
 
 class PhysBody;
 
@@ -32,8 +33,12 @@ public:
 	p2List<PhysBody*> ricks;
 
 	SDL_Texture* map;
-	SDL_Texture* red_light;
-	SDL_Texture* green_light;
+	SDL_Texture* red_light_tex;
+	SDL_Texture* green_light_tex;
+	SDL_Texture* leftflipper_tex;
+	SDL_Texture* rightflipper_tex;
+	SDL_Texture* coin_tex;
+
 
 	bool restart;
 
