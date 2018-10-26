@@ -36,6 +36,10 @@ public:
 	PhysBody* rightflipper;
 	PhysBody* leftflipper_joint;
 	PhysBody* rightflipper_joint;
+	PhysBody* leftflippersmall;
+	PhysBody* rightflippersmall;
+	PhysBody* leftflippersmall_joint;
+	PhysBody* rightflippersmall_joint;
 
 	SDL_Texture* map;
 	SDL_Texture* red_light_tex;

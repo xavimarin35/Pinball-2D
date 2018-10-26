@@ -37,7 +37,10 @@ bool ModuleSceneIntro::Start()
 	b2RevoluteJointDef jointDef_2;
 	b2RevoluteJoint* joint_1;
 	b2RevoluteJoint* joint_2;
-
+	b2RevoluteJointDef jointDefsmall_1;
+	b2RevoluteJointDef jointDefsmall_2;
+	b2RevoluteJoint* jointsmall_1;
+	b2RevoluteJoint* jointsmall_2;
 
 	// Shapes extracted from Ric's Shapes Creator!!
 	int pinball_externalshape[92] = {
@@ -252,23 +255,37 @@ bool ModuleSceneIntro::Start()
 	// Flippers stuff
 	rightflipper = App->physics->CreateRectangle(250, 622, 70, 15, b2_dynamicBody);
 	leftflipper = App->physics->CreateRectangle(210, 540, 70, 15, b2_dynamicBody);
+	rightflippersmall = App->physics->CreateRectangle(360, 300, 55, 8, b2_dynamicBody);
+	leftflippersmall = App->physics->CreateRectangle(160 + 40, 550, 55, 8, b2_dynamicBody);
 
 	rightflipper_joint = App->physics->CreateCircle(205, 622, 5, b2_staticBody);
 	leftflipper_joint = App->physics->CreateCircle(145+19, 550, 5, b2_staticBody);
+	rightflippersmall_joint = App->physics->CreateCircle(364, 300, 5, b2_staticBody); 
+	leftflippersmall_joint = App->physics->CreateCircle(160, 531, 5, b2_staticBody);
 	
 	jointDef_1.Initialize(leftflipper->body, leftflipper_joint->body, leftflipper_joint->body->GetWorldCenter());
 	jointDef_2.Initialize(rightflipper_joint->body, rightflipper->body, rightflipper_joint->body->GetWorldCenter());
+	jointDefsmall_1.Initialize(leftflippersmall->body, leftflippersmall_joint->body, leftflippersmall_joint->body->GetWorldCenter());
+	jointDefsmall_2.Initialize(rightflippersmall_joint->body, rightflippersmall->body, rightflippersmall_joint->body->GetWorldCenter());
 
 	jointDef_1.lowerAngle = -0.5f * b2_pi;
 	jointDef_1.upperAngle = 0.25f * b2_pi;
 	jointDef_2.lowerAngle = -0.5f * b2_pi;
 	jointDef_2.upperAngle = 0.25f * b2_pi;
+	jointDefsmall_1.lowerAngle = -0.5f * b2_pi;
+	jointDefsmall_1.upperAngle = 0.25f * b2_pi;
+	jointDefsmall_2.lowerAngle = -0.5f * b2_pi;
+	jointDefsmall_2.upperAngle = 0.25f * b2_pi;
 
 	jointDef_1.enableLimit = true;
 	jointDef_2.enableLimit = true;
+	jointDefsmall_1.enableLimit = true;
+	jointDefsmall_2.enableLimit = true;
 
 	joint_1 = (b2RevoluteJoint*)App->physics->world->CreateJoint(&jointDef_1);
 	joint_2 = (b2RevoluteJoint*)App->physics->world->CreateJoint(&jointDef_2);
+	jointsmall_1 = (b2RevoluteJoint*)App->physics->world->CreateJoint(&jointDefsmall_1);
+	jointsmall_2 = (b2RevoluteJoint*)App->physics->world->CreateJoint(&jointDefsmall_2);
 
 	return ret;
 }
@@ -309,6 +326,19 @@ update_status ModuleSceneIntro::Update()
 		int x, y;
 		rightflipper->GetPosition(x, y);
 		App->renderer->Blit(rightflipper_tex, x, y, NULL, 1.0f, rightflipper->GetRotation());
+	}
+
+	if (leftflippersmall != NULL)
+	{
+		int x, y;
+		leftflippersmall->GetPosition(x, y);
+		App->renderer->Blit(leftflippersmall_tex, x, y, NULL, 1.0f, leftflippersmall->GetRotation());
+	}
+	if (rightflippersmall != NULL)
+	{
+		int x, y;
+		rightflippersmall->GetPosition(x, y);
+		App->renderer->Blit(rightflippersmall_tex, x, y, NULL, 1.0f, rightflippersmall->GetRotation());
 	}
 
 	// restart game
