@@ -1,0 +1,59 @@
+// Green light touched:
+
+touched_green->PushBack({0,0,300,300});
+touched_green->PushBack({300,0,300,300});
+touched_green->PushBack({600,0,300,300});
+touched_green->PushBack({900,0,300,300});
+touched_green->PushBack({1200,0,300,300});
+touched_green->PushBack({1500,0,300,300});
+touched_green->loop = false;
+
+// Red light touched:
+
+touched_red->PushBack({0,300,300,300});
+touched_red->PushBack({300,300,300,300});
+touched_red->PushBack({600,300,300,300});
+touched_red->PushBack({900,300,300,300});
+touched_red->PushBack({1200,300,300,300});
+touched_red->PushBack({1500,300,300,300});
+touched_red->loop = false;
+
+// Coin touched:
+
+touched_coin->Pushback({1800,0,250,250});
+touched_coin->Pushback({1800,250,250,250});
+touched_coin->Pushback({1800,500,250,250});
+touched_coin->Pushback({2050,0,250,250});
+touched_coin->Pushback({2050,250,250,250});
+touched_coin->Pushback({2050,500,250,250});
+touched_coin->loop = false;
+
+// Coin:
+
+coin->Pushback({0,722,27,28});
+coin->Pushback({28,721,21,29});
+coin->Pushback({50,721,5,29});
+coin->Pushback({56,715,21,35});
+coin->Pushback({77,719,27,31});
+coin->Pushback({106,715,27,21});
+coin->Pushback({127,721,5,29});
+coin->Pushback({133,721,21,29});
+coin->loop = true;
+
+// Green light:
+
+green_light->Pushback({282,715,35,33});
+green_light->Pushback({0,0,0,0});
+green_light->loop = true;
+
+// Red light:
+
+red_light->Pushback({444,707,42,43});
+red_light->Pushback({0,0,0,0});
+red_light->loop = true;
+
+// Banner:
+
+banner->Pushback({2,754,428,240});
+banner->Pushback({430,754,428,240});
+banner->loop = true;
