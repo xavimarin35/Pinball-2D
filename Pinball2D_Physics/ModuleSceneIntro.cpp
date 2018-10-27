@@ -319,13 +319,13 @@ bool ModuleSceneIntro::Start()
 	// green ball (RADIUS = 16)
 
 	// Flippers stuff
-	rightflipper = App->physics->CreateRectangle(270, 796, 70, 15, b2_dynamicBody);
-	leftflipper = App->physics->CreateRectangle(210, 793, 70, 15, b2_dynamicBody);
-	rightflippersmall = App->physics->CreateRectangle(375, 275, 55, 8, b2_dynamicBody);
-	leftflippersmall = App->physics->CreateRectangle(190, 532, 55, 8, b2_dynamicBody);
+	rightflipper = App->physics->CreateRectangle(295, 785, 70, 15, b2_dynamicBody);
+	leftflipper = App->physics->CreateRectangle(190, 785, 70, 15, b2_dynamicBody);
+	rightflippersmall = App->physics->CreateRectangle(342, 301, 55, 8, b2_dynamicBody);
+	leftflippersmall = App->physics->CreateRectangle(174, 532, 55, 8, b2_dynamicBody);
 
-	rightflipper_joint = App->physics->CreateCircle(321, 796, 5, b2_staticBody);
-	leftflipper_joint = App->physics->CreateCircle(163, 793, 5, b2_staticBody);
+	rightflipper_joint = App->physics->CreateCircle(330, 785, 5, b2_staticBody);
+	leftflipper_joint = App->physics->CreateCircle(155, 785, 5, b2_staticBody);
 	rightflippersmall_joint = App->physics->CreateCircle(370, 301, 5, b2_staticBody);
 	leftflippersmall_joint = App->physics->CreateCircle(147, 532, 5, b2_staticBody);
 	
@@ -334,13 +334,13 @@ bool ModuleSceneIntro::Start()
 	jointDefsmall_1.Initialize(leftflippersmall->body, leftflippersmall_joint->body, leftflippersmall_joint->body->GetWorldCenter());
 	jointDefsmall_2.Initialize(rightflippersmall_joint->body, rightflippersmall->body, rightflippersmall_joint->body->GetWorldCenter());
 
-	jointDef_1.lowerAngle = -0.5f * b2_pi;
+	jointDef_1.lowerAngle = -0.1f * b2_pi;
 	jointDef_1.upperAngle = 0.25f * b2_pi;
-	jointDef_2.lowerAngle = -0.5f * b2_pi;
+	jointDef_2.lowerAngle = -0.1f * b2_pi;
 	jointDef_2.upperAngle = 0.25f * b2_pi;
-	jointDefsmall_1.lowerAngle = -0.5f * b2_pi;
+	jointDefsmall_1.lowerAngle = -0.1f * b2_pi;
 	jointDefsmall_1.upperAngle = 0.25f * b2_pi;
-	jointDefsmall_2.lowerAngle = -0.5f * b2_pi;
+	jointDefsmall_2.lowerAngle = -0.1f * b2_pi;
 	jointDefsmall_2.upperAngle = 0.25f * b2_pi;
 
 	jointDef_1.enableLimit = true;
