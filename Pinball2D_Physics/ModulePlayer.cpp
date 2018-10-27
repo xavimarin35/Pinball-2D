@@ -28,11 +28,12 @@ bool ModulePlayer::Start()
 
 	lifes = 4;
 	finished_ball = false;
+	ball_launched = false;
 	score = 0;
 	highest_score = 0;
 
-	initialBallPosition_x = SCREEN_WIDTH - 300;
-	initialBallPosition_y = SCREEN_HEIGHT - 600;
+	initialBallPosition_x = SCREEN_WIDTH - 32;
+	initialBallPosition_y = SCREEN_HEIGHT - 117;
 
 	ball = App->physics->CreateCircle(initialBallPosition_x, initialBallPosition_y, 12, b2_dynamicBody);
 
@@ -65,6 +66,16 @@ update_status ModulePlayer::Update()
 		if (ballpos_y > SCREEN_HEIGHT) { finished_ball = true; }
 	}
 
+	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT && ball_launched == false)
+	{
+		//Launch();
+		ball_launched = true;
+		b2Vec2 impulse = b2Vec2(0.0f, -3.5f);
+		b2Vec2 point = ball->body->GetLocalCenter();
+
+		ball->body->ApplyLinearImpulse(impulse, point, true);
+	}
+
 	// Controlling the game 
 	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
 	{
@@ -89,6 +100,7 @@ update_status ModulePlayer::Update()
 		// Appears the new ball
 		ball = App->physics->CreateCircle(initialBallPosition_x, initialBallPosition_y, 12, b2_dynamicBody);
 		finished_ball = false;
+		ball_launched = false;
 		lifes--;
 
 		// games has finished completely

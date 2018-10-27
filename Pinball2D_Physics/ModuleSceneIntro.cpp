@@ -24,6 +24,8 @@ bool ModuleSceneIntro::Start()
 
 	App->renderer->camera.x = App->renderer->camera.y = 0;
 
+	graphics = App->textures->Load("assets/textures/animations_spritesheet.png");
+
 	map = App->textures->Load("assets/textures/background.png"); 
 	red_light_tex = App->textures->Load("assets/textures/Red.png");
 	green_light_tex = App->textures->Load("assets/textures/Green.png");
@@ -41,6 +43,66 @@ bool ModuleSceneIntro::Start()
 	b2RevoluteJointDef jointDefsmall_2;
 	b2RevoluteJoint* jointsmall_1;
 	b2RevoluteJoint* jointsmall_2;
+
+	// Green light touched:
+
+	touched_green_anim.PushBack({ 0,0,300,300 });
+	touched_green_anim.PushBack({ 300,0,300,300 });
+	touched_green_anim.PushBack({ 600,0,300,300 });
+	touched_green_anim.PushBack({ 900,0,300,300 });
+	touched_green_anim.PushBack({ 1200,0,300,300 });
+	touched_green_anim.PushBack({ 1500,0,300,300 });
+	touched_green_anim.loop = false;
+
+	// Red light touched:
+
+	touched_red_anim.PushBack({ 0,300,300,300 });
+	touched_red_anim.PushBack({ 300,300,300,300 });
+	touched_red_anim.PushBack({ 600,300,300,300 });
+	touched_red_anim.PushBack({ 900,300,300,300 });
+	touched_red_anim.PushBack({ 1200,300,300,300 });
+	touched_red_anim.PushBack({ 1500,300,300,300 });
+	touched_red_anim.loop = false;
+
+	// Coin touched:
+
+	touched_coin_anim.PushBack({ 1800,0,250,250 });
+	touched_coin_anim.PushBack({ 1800,250,250,250 });
+	touched_coin_anim.PushBack({ 1800,500,250,250 });
+	touched_coin_anim.PushBack({ 2050,0,250,250 });
+	touched_coin_anim.PushBack({ 2050,250,250,250 });
+	touched_coin_anim.PushBack({ 2050,500,250,250 });
+	touched_coin_anim.loop = false;
+
+	// Coin:
+
+	coin_anim.PushBack({ 0,722,27,28 });
+	coin_anim.PushBack({ 28,721,21,29 });
+	coin_anim.PushBack({ 50,721,5,29 });
+	coin_anim.PushBack({ 56,715,21,35 });
+	coin_anim.PushBack({ 77,719,27,31 });
+	coin_anim.PushBack({ 106,715,27,21 });
+	coin_anim.PushBack({ 127,721,5,29 });
+	coin_anim.PushBack({ 133,721,21,29 });
+	coin_anim.loop = true;
+
+	// Green light:
+
+	green_light_anim.PushBack({ 282,715,35,33 });
+	green_light_anim.PushBack({ 0,0,0,0 });
+	green_light_anim.loop = true;
+
+	// Red light:
+
+	red_light_anim.PushBack({ 444,707,42,43 });
+	red_light_anim.PushBack({ 0,0,0,0 });
+	red_light_anim.loop = true;
+
+	// Banner:
+
+	banner_anim.PushBack({ 2,754,428,240 });
+	banner_anim.PushBack({ 430,754,428,240 });
+	banner_anim.loop = true;
 
 	// Shapes extracted from Ric's Shapes Creator!!
 	int pinball_externalshape[92] = {
@@ -252,6 +314,8 @@ bool ModuleSceneIntro::Start()
 	mapshapes.add(App->physics->CreateChain(0, 0, top_path, 94, b2_staticBody));
 	mapshapes.add(App->physics->CreateChain(0, 0, rocket_launcher, 10, b2_staticBody));
 
+	// green ball (RADIUS = 16)
+
 	// Flippers stuff
 	rightflipper = App->physics->CreateRectangle(250, 622, 70, 15, b2_dynamicBody);
 	leftflipper = App->physics->CreateRectangle(210, 540, 70, 15, b2_dynamicBody);
@@ -368,7 +432,7 @@ void ModuleSceneIntro::restartGame() {
 
 		App->player->lifes = 4;
 		App->player->score = 0;
-
+		App->player->ball_launched = false;
 		restart = false;
 
 	}

@@ -31,7 +31,11 @@ public:
 	p2List<PhysBody*> mapshapes;
 	p2List<PhysBody*> boxes;
 	p2List<PhysBody*> ricks;
-
+	
+	p2List<PhysBody*> green_lights;
+	p2List<PhysBody*> red_lights;
+	p2List<PhysBody*> coins;
+	
 	PhysBody* leftflipper;
 	PhysBody* rightflipper;
 	PhysBody* leftflipper_joint;
@@ -40,6 +44,10 @@ public:
 	PhysBody* rightflippersmall;
 	PhysBody* leftflippersmall_joint;
 	PhysBody* rightflippersmall_joint;
+	
+	PhysBody* green_light;
+	PhysBody* red_light;
+	PhysBody* coin;
 
 	SDL_Texture* map;
 	SDL_Texture* red_light_tex;
@@ -49,8 +57,17 @@ public:
 	SDL_Texture* leftflippersmall_tex;
 	SDL_Texture* rightflippersmall_tex;
 	SDL_Texture* coin_tex;
-	
-	
+	SDL_Texture* graphics = nullptr;
+
+	Animation* current_animation = nullptr;
+	Animation touched_green_anim;
+	Animation touched_red_anim;
+	Animation touched_coin_anim;
+	Animation coin_anim;
+	Animation green_light_anim;
+	Animation red_light_anim;
+	Animation banner_anim;
+		
 	bool restart;
 
 	uint bonus_fx;
