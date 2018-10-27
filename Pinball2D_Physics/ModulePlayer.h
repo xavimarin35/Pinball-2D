@@ -17,7 +17,7 @@ public:
 	update_status Update();
 	bool CleanUp();
 
-	//void OnCollision(PhysBody* bodyA, PhysBody* bodyB); 
+	void OnCollision(PhysBody* bodyA, PhysBody* bodyB); 
 
 public:
 	PhysBody* ball;

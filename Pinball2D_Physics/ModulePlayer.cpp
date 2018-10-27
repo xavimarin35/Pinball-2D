@@ -137,5 +137,16 @@ update_status ModulePlayer::Update()
 	return UPDATE_CONTINUE;
 }
 
+void ModulePlayer::OnCollision(PhysBody* bodyA, PhysBody* bodyB) {
+
+	/*int x, y;
+
+	for (p2List_item<greenlight*>* item = App->scene_intro->green_lights_list.getFirst(); item; item = item->next) {
+		if (item->data->sensor_green == bodyB && bodyA == ball) {
+			item->data->sensor_green->GetPosition(x, y);
+			App->renderer->Blit(item->data->texture_green, x, y);
+		}
+	}*/
+}
 
 

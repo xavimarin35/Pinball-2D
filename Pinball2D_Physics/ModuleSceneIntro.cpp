@@ -354,11 +354,14 @@ bool ModuleSceneIntro::Start()
 	jointsmall_2 = (b2RevoluteJoint*)App->physics->world->CreateJoint(&jointDefsmall_2);
 
 	//lights stuff
-	green_lights_list.add(new greenlight);
+	/*green_lights_list.add(new greenlight);
 	green_lights_list.getLast()->data->sensor_green = App->physics->CreateCircle(242, 39, 16, b2_staticBody, true);
-	green_lights_list.getLast()->data->texture_green = green_light_tex;
+	green_lights_list.getLast()->data->texture_green = green_light_tex;*/
 
-
+	//lights stuff
+	sensorgreenup2 = new PhysBody();
+	sensorgreenup2 = App->physics->CreateRectangleSensor(240, 39, 22, 22);
+	sensorgreenup2->listener = this;
 
 	return ret;
 }
@@ -377,6 +380,8 @@ bool ModuleSceneIntro::CleanUp()
 // Update: draw background
 update_status ModuleSceneIntro::Update()
 {
+	int x, y;
+
 	//Blit map
 	App->renderer->Blit(map, 0, 0);
 	
@@ -387,15 +392,20 @@ update_status ModuleSceneIntro::Update()
 	mouse.y = App->input->GetMouseY();
 
 	//Lights system
-	int i = 0;
+	if (sensorgreenup2_active == true) {
+		App->renderer->Blit(green_light_tex, 235, 36, NULL);
+	}
+
+	/*int i = 0;
+	
 	for (p2List_item<greenlight*>* item = green_lights_list.getFirst(); item; item = item->next) {
 		if (item->data->sensor_green_active) {
-			int x, y;
 			item->data->sensor_green->GetPosition(x, y);
 			App->renderer->Blit(item->data->texture_green, x, y);
 			i++;
 		}
-	}
+	}*/
+
 
 	// All draw functions ------------------------------------------------------
 	if (leftflipper != NULL)
@@ -438,7 +448,14 @@ update_status ModuleSceneIntro::Update()
 
 void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
-	App->audio->PlayFx(bonus_fx);
+	int x, y;
+
+	if (bodyA) 
+	{
+		if (bodyA == sensorgreenup2) {
+			sensorgreenup2_active = true;
+		}
+	}
 }
 
 void ModuleSceneIntro::restartGame() {

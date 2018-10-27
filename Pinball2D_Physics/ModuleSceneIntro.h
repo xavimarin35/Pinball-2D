@@ -56,6 +56,9 @@ public:
 	PhysBody* red_light;
 	PhysBody* coin;
 
+	PhysBody* sensorgreenup2;
+	bool sensorgreenup2_active;
+
 	SDL_Texture* map;
 	SDL_Texture* leftflipper_tex;
 	SDL_Texture* rightflipper_tex;
