@@ -317,15 +317,15 @@ bool ModuleSceneIntro::Start()
 	// green ball (RADIUS = 16)
 
 	// Flippers stuff
-	rightflipper = App->physics->CreateRectangle(250, 622, 70, 15, b2_dynamicBody);
-	leftflipper = App->physics->CreateRectangle(210, 540, 70, 15, b2_dynamicBody);
-	rightflippersmall = App->physics->CreateRectangle(360, 300, 55, 8, b2_dynamicBody);
-	leftflippersmall = App->physics->CreateRectangle(160 + 40, 550, 55, 8, b2_dynamicBody);
+	rightflipper = App->physics->CreateRectangle(270, 796, 70, 15, b2_dynamicBody);
+	leftflipper = App->physics->CreateRectangle(210, 793, 70, 15, b2_dynamicBody);
+	rightflippersmall = App->physics->CreateRectangle(375, 275, 55, 8, b2_dynamicBody);
+	leftflippersmall = App->physics->CreateRectangle(190, 532, 55, 8, b2_dynamicBody);
 
-	rightflipper_joint = App->physics->CreateCircle(205, 622, 5, b2_staticBody);
-	leftflipper_joint = App->physics->CreateCircle(145+19, 550, 5, b2_staticBody);
-	rightflippersmall_joint = App->physics->CreateCircle(364, 300, 5, b2_staticBody); 
-	leftflippersmall_joint = App->physics->CreateCircle(160, 531, 5, b2_staticBody);
+	rightflipper_joint = App->physics->CreateCircle(321, 796, 5, b2_staticBody);
+	leftflipper_joint = App->physics->CreateCircle(163, 793, 5, b2_staticBody);
+	rightflippersmall_joint = App->physics->CreateCircle(370, 301, 5, b2_staticBody);
+	leftflippersmall_joint = App->physics->CreateCircle(147, 532, 5, b2_staticBody);
 	
 	jointDef_1.Initialize(leftflipper->body, leftflipper_joint->body, leftflipper_joint->body->GetWorldCenter());
 	jointDef_2.Initialize(rightflipper_joint->body, rightflipper->body, rightflipper_joint->body->GetWorldCenter());

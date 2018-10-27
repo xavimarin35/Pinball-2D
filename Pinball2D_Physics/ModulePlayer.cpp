@@ -79,14 +79,24 @@ update_status ModulePlayer::Update()
 	// Controlling the game 
 	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT)
 	{
-		App->scene_intro->leftflipper->body->ApplyAngularImpulse(-2.0f, true);
-		App->scene_intro->leftflippersmall->body->ApplyAngularImpulse(-2.0f, true);
+		App->scene_intro->leftflipper->body->ApplyTorque(-50.0f, true);
+		App->scene_intro->leftflippersmall->body->ApplyTorque(-50.0f, true);
+	}
+	else 
+	{
+		App->scene_intro->leftflipper->body->ApplyTorque(10.0f, true);
+		App->scene_intro->leftflippersmall->body->ApplyTorque(10.0f, true);
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT)
 	{
-		App->scene_intro->rightflipper->body->ApplyAngularImpulse(3.0f, true);
-		App->scene_intro->rightflippersmall->body->ApplyAngularImpulse(2.0f, true);
+		App->scene_intro->rightflipper->body->ApplyTorque(50.0f, true);
+		App->scene_intro->rightflippersmall->body->ApplyTorque(50.0f, true);
+	}
+	else
+	{
+		App->scene_intro->rightflipper->body->ApplyTorque(-10.0f, true);
+		App->scene_intro->rightflippersmall->body->ApplyTorque(-10.0f, true);
 	}
 
 	// Reappearing Code
