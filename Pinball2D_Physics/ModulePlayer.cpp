@@ -35,7 +35,7 @@ bool ModulePlayer::Start()
 	initialBallPosition_x = SCREEN_WIDTH - 32;
 	initialBallPosition_y = SCREEN_HEIGHT - 117;
 
-	ball = App->physics->CreateCircle(initialBallPosition_x, initialBallPosition_y, 12, b2_dynamicBody);
+	ball = App->physics->CreateCircle(initialBallPosition_x, initialBallPosition_y, 12, b2_dynamicBody, false);
 
 	return true;
 }
@@ -108,7 +108,7 @@ update_status ModulePlayer::Update()
 		}
 
 		// Appears the new ball
-		ball = App->physics->CreateCircle(initialBallPosition_x, initialBallPosition_y, 12, b2_dynamicBody);
+		ball = App->physics->CreateCircle(initialBallPosition_x, initialBallPosition_y, 12, b2_dynamicBody, false);
 		finished_ball = false;
 		ball_launched = false;
 		lifes--;

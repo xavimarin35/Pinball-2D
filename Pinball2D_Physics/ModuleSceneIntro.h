@@ -7,13 +7,22 @@
 
 class PhysBody;
 
-// structs of all components of the pinball (flippers, launchers...etc)
-
-struct light {
-	PhysBody* sensor = nullptr;
-	bool working = false;
-	SDL_Texture* light_tex = nullptr;
+// struct of the light
+struct redlight {
+	SDL_Texture* texture_red = nullptr;
+	PhysBody* sensor_red = nullptr;
+	bool sensor_red_active = false;
+	//animation maybe too
 };
+
+struct greenlight {
+	SDL_Texture* texture_green = nullptr;
+	PhysBody* sensor_green = nullptr;
+	bool sensor_green_active = false;
+	// animation maybe too
+};
+
+
 class ModuleSceneIntro : public Module
 {
 public:
@@ -29,10 +38,8 @@ public:
 
 public:
 	p2List<PhysBody*> mapshapes;
-	p2List<PhysBody*> boxes;
-	p2List<PhysBody*> ricks;
 	
-	p2List<PhysBody*> green_lights;
+	p2List<greenlight*> green_lights_list;
 	p2List<PhysBody*> red_lights;
 	p2List<PhysBody*> coins;
 	
@@ -50,12 +57,12 @@ public:
 	PhysBody* coin;
 
 	SDL_Texture* map;
-	SDL_Texture* red_light_tex;
-	SDL_Texture* green_light_tex;
 	SDL_Texture* leftflipper_tex;
 	SDL_Texture* rightflipper_tex;
 	SDL_Texture* leftflippersmall_tex;
 	SDL_Texture* rightflippersmall_tex;
+	SDL_Texture* green_light_tex;
+	SDL_Texture* red_light_tex;
 	SDL_Texture* coin_tex;
 	SDL_Texture* graphics = nullptr;
 

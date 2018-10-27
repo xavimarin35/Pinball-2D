@@ -197,7 +197,7 @@ bool ModuleSceneIntro::Start()
 	378, 442,
 	431, 465,
 	432, 752,
-	341, 779
+	341, 777
 	};
 
 	int rightdown_bouncer[18] = {
@@ -319,28 +319,28 @@ bool ModuleSceneIntro::Start()
 	// green ball (RADIUS = 16)
 
 	// Flippers stuff
-	rightflipper = App->physics->CreateRectangle(295, 785, 70, 15, b2_dynamicBody);
-	leftflipper = App->physics->CreateRectangle(190, 785, 70, 15, b2_dynamicBody);
+	rightflipper = App->physics->CreateRectangle(295, 785, 70, 8, b2_dynamicBody);
+	leftflipper = App->physics->CreateRectangle(190, 785, 70, 8, b2_dynamicBody);
 	rightflippersmall = App->physics->CreateRectangle(342, 301, 55, 8, b2_dynamicBody);
 	leftflippersmall = App->physics->CreateRectangle(174, 532, 55, 8, b2_dynamicBody);
 
-	rightflipper_joint = App->physics->CreateCircle(330, 785, 5, b2_staticBody);
-	leftflipper_joint = App->physics->CreateCircle(155, 785, 5, b2_staticBody);
-	rightflippersmall_joint = App->physics->CreateCircle(370, 301, 5, b2_staticBody);
-	leftflippersmall_joint = App->physics->CreateCircle(147, 532, 5, b2_staticBody);
+	rightflipper_joint = App->physics->CreateCircle(330, 785, 5, b2_staticBody, false);
+	leftflipper_joint = App->physics->CreateCircle(155, 785, 5, b2_staticBody, false);
+	rightflippersmall_joint = App->physics->CreateCircle(370, 301, 5, b2_staticBody, false);
+	leftflippersmall_joint = App->physics->CreateCircle(147, 532, 5, b2_staticBody, false);
 	
 	jointDef_1.Initialize(leftflipper->body, leftflipper_joint->body, leftflipper_joint->body->GetWorldCenter());
 	jointDef_2.Initialize(rightflipper_joint->body, rightflipper->body, rightflipper_joint->body->GetWorldCenter());
 	jointDefsmall_1.Initialize(leftflippersmall->body, leftflippersmall_joint->body, leftflippersmall_joint->body->GetWorldCenter());
 	jointDefsmall_2.Initialize(rightflippersmall_joint->body, rightflippersmall->body, rightflippersmall_joint->body->GetWorldCenter());
 
-	jointDef_1.lowerAngle = -0.1f * b2_pi;
+	jointDef_1.lowerAngle = -0.12f * b2_pi;
 	jointDef_1.upperAngle = 0.25f * b2_pi;
-	jointDef_2.lowerAngle = -0.1f * b2_pi;
+	jointDef_2.lowerAngle = -0.12f * b2_pi;
 	jointDef_2.upperAngle = 0.25f * b2_pi;
-	jointDefsmall_1.lowerAngle = -0.1f * b2_pi;
+	jointDefsmall_1.lowerAngle = -0.12f * b2_pi;
 	jointDefsmall_1.upperAngle = 0.25f * b2_pi;
-	jointDefsmall_2.lowerAngle = -0.1f * b2_pi;
+	jointDefsmall_2.lowerAngle = -0.12f * b2_pi;
 	jointDefsmall_2.upperAngle = 0.25f * b2_pi;
 
 	jointDef_1.enableLimit = true;
@@ -352,6 +352,13 @@ bool ModuleSceneIntro::Start()
 	joint_2 = (b2RevoluteJoint*)App->physics->world->CreateJoint(&jointDef_2);
 	jointsmall_1 = (b2RevoluteJoint*)App->physics->world->CreateJoint(&jointDefsmall_1);
 	jointsmall_2 = (b2RevoluteJoint*)App->physics->world->CreateJoint(&jointDefsmall_2);
+
+	//lights stuff
+	green_lights_list.add(new greenlight);
+	green_lights_list.getLast()->data->sensor_green = App->physics->CreateCircle(242, 39, 16, b2_staticBody, true);
+	green_lights_list.getLast()->data->texture_green = green_light_tex;
+
+
 
 	return ret;
 }
@@ -378,6 +385,17 @@ update_status ModuleSceneIntro::Update()
 	iPoint mouse;
 	mouse.x = App->input->GetMouseX();
 	mouse.y = App->input->GetMouseY();
+
+	//Lights system
+	int i = 0;
+	for (p2List_item<greenlight*>* item = green_lights_list.getFirst(); item; item = item->next) {
+		if (item->data->sensor_green_active) {
+			int x, y;
+			item->data->sensor_green->GetPosition(x, y);
+			App->renderer->Blit(item->data->texture_green, x, y);
+			i++;
+		}
+	}
 
 	// All draw functions ------------------------------------------------------
 	if (leftflipper != NULL)
@@ -406,6 +424,8 @@ update_status ModuleSceneIntro::Update()
 		rightflippersmall->GetPosition(x, y);
 		App->renderer->Blit(rightflippersmall_tex, x, y, NULL, 1.0f, rightflippersmall->GetRotation());
 	}
+
+
 
 	// restart game
 	if (restart == true)
