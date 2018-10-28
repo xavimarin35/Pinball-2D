@@ -51,7 +51,7 @@ bool ModuleAudio::Init()
 	restart = LoadFx("assets/fx/Restart.wav");
 	start = LoadFx("assets/fx/Start.wav");
 
-	//PlayMusic("assets/music/music.ogg");
+	PlayMusic("assets/music/music.ogg");
 
 	return ret;
 }

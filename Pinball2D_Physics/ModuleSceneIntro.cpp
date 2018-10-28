@@ -47,24 +47,28 @@ bool ModuleSceneIntro::Start()
 
 	// Green light touched:
 
-	touched_green_anim.PushBack({ 0,0,300,300 });
+	touched_green_anim.PushBack({ 282,715,35,33 });
+	
+	/*touched_green_anim.PushBack({ 0,0,300,300 });
 	touched_green_anim.PushBack({ 300,0,300,300 });
 	touched_green_anim.PushBack({ 600,0,300,300 });
 	touched_green_anim.PushBack({ 900,0,300,300 });
 	touched_green_anim.PushBack({ 1200,0,300,300 });
 	touched_green_anim.PushBack({ 1500,0,300,300 });
 	touched_green_anim.speed = 0.3f;
-	touched_green_anim.loop = false;
+	touched_green_anim.loop = false;*/
 
 	// Red light touched:
 
-	touched_red_anim.PushBack({ 0,300,300,300 });
+	touched_red_anim.PushBack({ 444,707,42,43 });
+
+	/*touched_red_anim.PushBack({ 0,300,300,300 });
 	touched_red_anim.PushBack({ 300,300,300,300 });
 	touched_red_anim.PushBack({ 600,300,300,300 });
 	touched_red_anim.PushBack({ 900,300,300,300 });
 	touched_red_anim.PushBack({ 1200,300,300,300 });
 	touched_red_anim.PushBack({ 1500,300,300,300 });
-	touched_red_anim.loop = false;
+	touched_red_anim.loop = false;*/
 
 	// Coin touched:
 
@@ -357,20 +361,47 @@ bool ModuleSceneIntro::Start()
 	jointsmall_2 = (b2RevoluteJoint*)App->physics->world->CreateJoint(&jointDefsmall_2);
 
 	//lights stuff
-	/*green_lights_list.add(new greenlight);
-	green_lights_list.getLast()->data->sensor_green = App->physics->CreateCircle(242, 39, 16, b2_staticBody, true);
-	green_lights_list.getLast()->data->texture_green = green_light_tex;*/
+	sensorgreenup1 = new PhysBody();
+	sensorgreenup1 = App->physics->CreateRectangleSensor(182, 49, 22, 22);
+	sensorgreenup1->listener = this;
 
-	//lights stuff
 	sensorgreenup2 = new PhysBody();
 	sensorgreenup2 = App->physics->CreateRectangleSensor(240, 39, 22, 22);
 	sensorgreenup2->listener = this;
 
+	sensorgreenup3 = new PhysBody();
+	sensorgreenup3 = App->physics->CreateRectangleSensor(302, 47, 22, 22);
+	sensorgreenup3->listener = this;
+	
+	sensorgreenup4 = new PhysBody();
+	sensorgreenup4 = App->physics->CreateRectangleSensor(256, 274, 22, 22);
+	sensorgreenup4->listener = this;
+
+	sensorgreenup5 = new PhysBody();
+	sensorgreenup5 = App->physics->CreateRectangleSensor(143, 379, 22, 22);
+	sensorgreenup5->listener = this;
+
+	sensorgreenup6 = new PhysBody();
+	sensorgreenup6 = App->physics->CreateRectangleSensor(359, 379, 22, 22);
+	sensorgreenup6->listener = this;
+
+	sensorgreenup7 = new PhysBody();
+	sensorgreenup7 = App->physics->CreateRectangleSensor(256, 480, 22, 22);
+	sensorgreenup7->listener = this;
+
 	
 	//bouncers stuff
-	bouncerleft = new PhysBody();
-	bouncerleft = App->physics->CreateCircle(300, 350, 25, b2_staticBody, false);
-	bouncerleft->listener = this;
+	bouncer1 = new PhysBody();
+	bouncer1 = App->physics->CreateCircle(165, 181, 21, b2_staticBody, false);
+	bouncer1->listener = this;
+
+	bouncer2 = new PhysBody();
+	bouncer2 = App->physics->CreateCircle(253, 139, 21, b2_staticBody, false);
+	bouncer2->listener = this;
+
+	bouncer3 = new PhysBody();
+	bouncer3 = App->physics->CreateCircle(333, 181, 21, b2_staticBody, false);
+	bouncer3->listener = this;
 
 	return ret;
 }
@@ -401,12 +432,68 @@ update_status ModuleSceneIntro::Update()
 	mouse.y = App->input->GetMouseY();
 
 	//Lights system
-	if (sensorgreenup2_active == true) 
+	if (sensorgreenup1_active == true) 
 	{
 		SDL_Rect greenRect = current_green_anim->GetCurrentFrame();
-		App->renderer->Blit(graphics, 91, -109, &greenRect, NULL);
+		App->renderer->Blit(graphics, 182-15, 49-15, &greenRect, NULL);
+		sensorgreenup1_active = false;
 	}
-	//touched_green_anim.Finished();
+	if (sensorgreenup2_active == true)
+	{
+		SDL_Rect greenRect = current_green_anim->GetCurrentFrame();
+		App->renderer->Blit(graphics, 240 - 15, 39 - 15, &greenRect, NULL);
+		sensorgreenup2_active = false;
+	}
+	if (sensorgreenup3_active == true)
+	{
+		SDL_Rect greenRect = current_green_anim->GetCurrentFrame();
+		App->renderer->Blit(graphics, 302 - 15, 47 - 15, &greenRect, NULL);
+		sensorgreenup3_active = false;
+	}
+	if (sensorgreenup4_active == true)
+	{
+		SDL_Rect greenRect = current_green_anim->GetCurrentFrame();
+		App->renderer->Blit(graphics, 256 - 15, 274 - 15, &greenRect, NULL);
+		sensorgreenup4_active = false;
+	}
+	if (sensorgreenup5_active == true)
+	{
+		SDL_Rect greenRect = current_green_anim->GetCurrentFrame();
+		App->renderer->Blit(graphics, 143 - 15, 379 - 15, &greenRect, NULL);
+		sensorgreenup5_active = false;
+	}
+	if (sensorgreenup6_active == true)
+	{
+		SDL_Rect greenRect = current_green_anim->GetCurrentFrame();
+		App->renderer->Blit(graphics, 359 - 15, 379 - 15, &greenRect, NULL);
+		sensorgreenup6_active = false;
+	}
+	if (sensorgreenup7_active == true)
+	{
+		SDL_Rect greenRect = current_green_anim->GetCurrentFrame();
+		App->renderer->Blit(graphics, 256 - 15, 480 - 15, &greenRect, NULL);
+		sensorgreenup7_active = false;
+	}
+
+	if (sensorbouncer1_active == true) 
+	{
+		SDL_Rect bouncerRect = current_bouncer_anim->GetCurrentFrame();
+		App->renderer->Blit(graphics, 165 - 18, 181 - 18, &bouncerRect, NULL);
+		sensorbouncer1_active = false;
+	}
+	if (sensorbouncer2_active == true)
+	{
+		SDL_Rect bouncerRect = current_bouncer_anim->GetCurrentFrame();
+		App->renderer->Blit(graphics, 253 - 18, 139 - 18, &bouncerRect, NULL);
+		sensorbouncer2_active = false;
+	}
+	if (sensorbouncer3_active == true)
+	{
+		SDL_Rect bouncerRect = current_bouncer_anim->GetCurrentFrame();
+		App->renderer->Blit(graphics, 333 - 18, 181 - 18, &bouncerRect, NULL);
+		sensorbouncer3_active = false;
+	}
+	
 
 	// All draw functions ------------------------------------------------------
 	if (leftflipper != NULL)
@@ -451,17 +538,76 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
 	int x, y;
 
+	if (bodyA == sensorgreenup1)
+	{
+		sensorgreenup1_active = true;
+		App->player->score += 10;
+		current_green_anim = &touched_green_anim;
+		App->audio->PlayFx(App->audio->green_circle);
+	}
 	if (bodyA == sensorgreenup2)
 	{
 		sensorgreenup2_active = true;
-		App->player->score += 30;
+		App->player->score += 10;
 		current_green_anim = &touched_green_anim;
+		App->audio->PlayFx(App->audio->green_circle);
+	}
+	if (bodyA == sensorgreenup3)
+	{
+		sensorgreenup3_active = true;
+		App->player->score += 10;
+		current_green_anim = &touched_green_anim;
+		App->audio->PlayFx(App->audio->green_circle);
+	}
+	if (bodyA == sensorgreenup4)
+	{
+		sensorgreenup4_active = true;
+		App->player->score += 10;
+		current_green_anim = &touched_green_anim;
+		App->audio->PlayFx(App->audio->green_circle);
+	}
+	if (bodyA == sensorgreenup5)
+	{
+		sensorgreenup5_active = true;
+		App->player->score += 10;
+		current_green_anim = &touched_green_anim;
+		App->audio->PlayFx(App->audio->green_circle);
+	}
+	if (bodyA == sensorgreenup6)
+	{
+		sensorgreenup6_active = true;
+		App->player->score += 10;
+		current_green_anim = &touched_green_anim;
+		App->audio->PlayFx(App->audio->green_circle);
+	}
+	if (bodyA == sensorgreenup7)
+	{
+		sensorgreenup7_active = true;
+		App->player->score += 10;
+		current_green_anim = &touched_green_anim;
+		App->audio->PlayFx(App->audio->green_circle);
 	}
 
-	if (bodyA != sensorgreenup2) 
+	if (bodyA == bouncer1) 
 	{
-		sensorgreenup2_active == false;
-		current_green_anim = &touched_green_anim;
+		sensorbouncer1_active = true;
+		App->player->score += 20;
+		current_bouncer_anim = &touched_red_anim;
+		App->audio->PlayFx(App->audio->red_circle);
+	}
+	if (bodyA == bouncer2)
+	{
+		sensorbouncer2_active = true;
+		App->player->score += 20;
+		current_bouncer_anim = &touched_red_anim;
+		App->audio->PlayFx(App->audio->red_circle);
+	}
+	if (bodyA == bouncer3)
+	{
+		sensorbouncer3_active = true;
+		App->player->score += 20;
+		current_bouncer_anim = &touched_red_anim;
+		App->audio->PlayFx(App->audio->red_circle);
 	}
 }
 

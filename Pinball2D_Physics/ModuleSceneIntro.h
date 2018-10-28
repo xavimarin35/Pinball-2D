@@ -51,15 +51,40 @@ public:
 	PhysBody* rightflippersmall;
 	PhysBody* leftflippersmall_joint;
 	PhysBody* rightflippersmall_joint;
-	PhysBody* bouncerleft;
+	
+	PhysBody* bouncer1;
+	bool sensorbouncer1_active;
 
+	PhysBody* bouncer2;
+	bool sensorbouncer2_active;
+
+	PhysBody* bouncer3;
+	bool sensorbouncer3_active;
 
 	PhysBody* green_light;
 	PhysBody* red_light;
 	PhysBody* coin;
 
+	PhysBody* sensorgreenup1;
+	bool sensorgreenup1_active;
+	
 	PhysBody* sensorgreenup2;
 	bool sensorgreenup2_active;
+
+	PhysBody* sensorgreenup3;
+	bool sensorgreenup3_active;
+
+	PhysBody* sensorgreenup4;
+	bool sensorgreenup4_active;
+
+	PhysBody* sensorgreenup5;
+	bool sensorgreenup5_active;
+
+	PhysBody* sensorgreenup6;
+	bool sensorgreenup6_active;
+
+	PhysBody* sensorgreenup7;
+	bool sensorgreenup7_active;
 
 	SDL_Texture* map;
 	SDL_Texture* leftflipper_tex;
@@ -75,6 +100,7 @@ public:
 	Animation* current_banner_anim = nullptr;
 	Animation touched_green_anim;
 	Animation* current_green_anim = nullptr;
+	Animation* current_bouncer_anim = nullptr;
 	Animation touched_red_anim;
 	Animation touched_coin_anim;
 	Animation coin_anim;
