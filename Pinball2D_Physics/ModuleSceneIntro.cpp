@@ -104,6 +104,7 @@ bool ModuleSceneIntro::Start()
 
 	banner_anim.PushBack({ 2,754,428,240 });
 	banner_anim.PushBack({ 430,754,428,240 });
+	banner_anim.speed = 0.05f;
 	banner_anim.loop = true;
 
 	// Shapes extracted from Ric's Shapes Creator!!
@@ -399,7 +400,7 @@ update_status ModuleSceneIntro::Update()
 		SDL_Rect greenRect = current_green_anim->GetCurrentFrame();
 		App->renderer->Blit(graphics, 91, -109, &greenRect, NULL);
 	}
-	touched_green_anim.Finished();
+	//touched_green_anim.Finished();
 
 	// All draw functions ------------------------------------------------------
 	if (leftflipper != NULL)
@@ -461,6 +462,9 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 void ModuleSceneIntro::restartGame() {
 
 	//banner
+	SDL_Rect bannerRect = current_banner_anim->GetCurrentFrame();
+	App->renderer->Blit(graphics, 0, 0, &bannerRect, NULL);
+	
 	//scene of the map Unload
 	//scene of the banner Load
 

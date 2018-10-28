@@ -117,6 +117,7 @@ update_status ModulePlayer::Update()
 		if (lifes < 0) 
 		{
 			App->scene_intro->restart = true;
+			App->scene_intro->current_banner_anim = &App->scene_intro->banner_anim;
 
 		}
 		else {

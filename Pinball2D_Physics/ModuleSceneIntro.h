@@ -69,7 +69,8 @@ public:
 	SDL_Texture* coin_tex;
 	SDL_Texture* graphics = nullptr;
 
-	Animation* current_animation = nullptr;
+	Animation banner_anim;
+	Animation* current_banner_anim = nullptr;
 	Animation touched_green_anim;
 	Animation* current_green_anim = nullptr;
 	Animation touched_red_anim;
@@ -77,7 +78,6 @@ public:
 	Animation coin_anim;
 	Animation green_light_anim;
 	Animation red_light_anim;
-	Animation banner_anim;
 		
 	bool restart;
 
