@@ -1,7 +1,7 @@
 #ifndef __ANIMATION_H__
 #define __ANIMATION_H__
 #include "SDL/include/SDL_rect.h"
-#define MAX_FRAMES 1000
+#define MAX_FRAMES 100
 
 class Animation
 {
@@ -11,7 +11,7 @@ public:
 	SDL_Rect frames[MAX_FRAMES];
 private:
 
-	float current_frame = 0.0f;
+	float current_frame;
 	int last_frame = 0;
 	int loops = 0;
 public:

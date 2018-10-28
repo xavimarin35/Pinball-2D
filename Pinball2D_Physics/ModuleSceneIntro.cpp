@@ -7,6 +7,7 @@
 #include "ModuleAudio.h"
 #include "ModulePhysics.h"
 #include "ModulePlayer.h"
+#include "Animation.h"
 
 ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -52,6 +53,7 @@ bool ModuleSceneIntro::Start()
 	touched_green_anim.PushBack({ 900,0,300,300 });
 	touched_green_anim.PushBack({ 1200,0,300,300 });
 	touched_green_anim.PushBack({ 1500,0,300,300 });
+	touched_green_anim.speed = 0.3f;
 	touched_green_anim.loop = false;
 
 	// Red light touched:
@@ -393,7 +395,10 @@ update_status ModuleSceneIntro::Update()
 
 	//Lights system
 	if (sensorgreenup2_active == true) {
-		App->renderer->Blit(green_light_tex, 235, 36, NULL);
+		SDL_Rect greenRect = current_green_anim->GetCurrentFrame();
+		App->renderer->Blit(graphics, 235, 100, &greenRect, NULL);
+		//sensorgreenup2_active = false;
+		// polete perque no aparegui el error 
 	}
 
 	/*int i = 0;
@@ -454,6 +459,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	{
 		if (bodyA == sensorgreenup2) {
 			sensorgreenup2_active = true;
+			current_green_anim = &touched_green_anim;
 		}
 	}
 }

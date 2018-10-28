@@ -71,6 +71,7 @@ public:
 
 	Animation* current_animation = nullptr;
 	Animation touched_green_anim;
+	Animation* current_green_anim = nullptr;
 	Animation touched_red_anim;
 	Animation touched_coin_anim;
 	Animation coin_anim;
