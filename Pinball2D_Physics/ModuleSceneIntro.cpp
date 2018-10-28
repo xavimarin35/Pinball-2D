@@ -287,8 +287,8 @@ bool ModuleSceneIntro::Start()
 	// green ball (RADIUS = 16)
 
 	// Flippers stuff
-	rightflipper = App->physics->CreateRectangle(295, 785, 70, 8, b2_dynamicBody);
-	leftflipper = App->physics->CreateRectangle(190, 785, 78, 8, b2_dynamicBody);
+	rightflipper = App->physics->CreateRectangle(295, 785, 71, 8, b2_dynamicBody);
+	leftflipper = App->physics->CreateRectangle(190, 785, 80, 8, b2_dynamicBody);
 	rightflippersmall = App->physics->CreateRectangle(342, 301, 55, 8, b2_dynamicBody);
 	leftflippersmall = App->physics->CreateRectangle(174, 532, 55, 8, b2_dynamicBody);
 
@@ -363,6 +363,10 @@ bool ModuleSceneIntro::Start()
 	bouncer3 = new PhysBody();
 	bouncer3 = App->physics->CreateCircle(333, 181, 21, b2_staticBody, false);
 	bouncer3->listener = this;
+
+	barrier = new PhysBody();
+	barrier = App->physics->CreateRectangleSensor(343, 50, 10, 10);
+	barrier->listener = this;
 
 	return ret;
 }
@@ -459,6 +463,12 @@ update_status ModuleSceneIntro::Update()
 		sensorbouncer3_active = false;
 	}
 
+	// Barrier
+	if (barrier_active == true) {
+		barrier = App->physics->CreateRectangle(343, 50, 1, 50, b2_staticBody);
+		barrier_active = false;
+	}
+	
 	// All draw functions ------------------------------------------------------
 	if (leftflipper != NULL)
 	{
@@ -503,51 +513,37 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	if (bodyA == sensorgreenup1)
 	{
 		sensorgreenup1_active = true;
-		App->player->score += 10;
-		current_green_anim = &touched_green_anim;
-		App->audio->PlayFx(App->audio->green_circle);
+		ApplyChangesinGreenLights();
 	}
 	if (bodyA == sensorgreenup2)
 	{
 		sensorgreenup2_active = true;
-		App->player->score += 10;
-		current_green_anim = &touched_green_anim;
-		App->audio->PlayFx(App->audio->green_circle);
+		ApplyChangesinGreenLights();
 	}
 	if (bodyA == sensorgreenup3)
 	{
 		sensorgreenup3_active = true;
-		App->player->score += 10;
-		current_green_anim = &touched_green_anim;
-		App->audio->PlayFx(App->audio->green_circle);
+		ApplyChangesinGreenLights();
 	}
 	if (bodyA == sensorgreenup4)
 	{
 		sensorgreenup4_active = true;
-		App->player->score += 10;
-		current_green_anim = &touched_green_anim;
-		App->audio->PlayFx(App->audio->green_circle);
+		ApplyChangesinGreenLights();
 	}
 	if (bodyA == sensorgreenup5)
 	{
 		sensorgreenup5_active = true;
-		App->player->score += 10;
-		current_green_anim = &touched_green_anim;
-		App->audio->PlayFx(App->audio->green_circle);
+		ApplyChangesinGreenLights();
 	}
 	if (bodyA == sensorgreenup6)
 	{
 		sensorgreenup6_active = true;
-		App->player->score += 10;
-		current_green_anim = &touched_green_anim;
-		App->audio->PlayFx(App->audio->green_circle);
+		ApplyChangesinGreenLights();
 	}
 	if (bodyA == sensorgreenup7)
 	{
 		sensorgreenup7_active = true;
-		App->player->score += 10;
-		current_green_anim = &touched_green_anim;
-		App->audio->PlayFx(App->audio->green_circle);
+		ApplyChangesinGreenLights();
 	}
 
 	if (bodyA == bouncer1) 
@@ -571,6 +567,10 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		current_bouncer_anim = &touched_red_anim;
 		App->audio->PlayFx(App->audio->red_circle);
 	}
+	if (bodyA == barrier)
+	{
+		barrier_active = true;
+	}
 }
 
 void ModuleSceneIntro::restartGame() 
@@ -592,3 +592,21 @@ void ModuleSceneIntro::restartGame()
 		current_banner_anim = &banner_anim;
 	}
 }
+void ModuleSceneIntro::ApplyChangesinGreenLights()
+{
+	if (App->player->score < 2500)
+	{
+		App->player->score += 10;
+	}
+	else if (2500 <= App->player->score && App->player->score < 7500)
+	{
+		App->player->score += 30;
+	}
+	else {
+		App->player->score += 50;
+	}
+	current_green_anim = &touched_green_anim;
+	App->audio->PlayFx(App->audio->green_circle);
+}
+
+

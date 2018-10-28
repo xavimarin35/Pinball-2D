@@ -17,7 +17,8 @@ public:
 	update_status Update();
 	bool CleanUp();
 	void OnCollision(PhysBody* bodyA, PhysBody* bodyB);
-
+	void ApplyChangesinGreenLights();
+	//void ApplyChangesinRedLights();
 	void restartGame(); //A function to reset everything and start again must be here
 
 public:
@@ -65,6 +66,11 @@ public:
 
 	PhysBody* sensorgreenup7;
 	bool sensorgreenup7_active;
+
+	PhysBody* barrier;
+	bool barrier_active;
+
+
 
 	SDL_Texture* map;
 	SDL_Texture* leftflipper_tex;

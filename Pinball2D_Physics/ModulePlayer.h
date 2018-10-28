@@ -29,6 +29,7 @@ public:
 	int highest_score;
 	bool finished_ball;
 	bool ball_launched;
+	bool lifeadded;
 
 	int initialBallPosition_x;
 	int initialBallPosition_y;

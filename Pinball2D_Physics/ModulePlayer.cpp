@@ -105,6 +105,13 @@ update_status ModulePlayer::Update()
 			ball = nullptr;
 		}
 
+		//Barrier reset
+		if (App->scene_intro->barrier != nullptr) {
+			App->scene_intro->barrier->body->GetWorld()->DestroyBody(App->scene_intro->barrier->body);
+			App->scene_intro->barrier = nullptr;
+			App->scene_intro->barrier_active = false;
+		}
+
 		// Appears the new ball
 		ball = App->physics->CreateCircle(initialBallPosition_x, initialBallPosition_y, 12, b2_dynamicBody, false);
 		finished_ball = false;
@@ -121,7 +128,7 @@ update_status ModulePlayer::Update()
 			App->audio->PlayFx(App->audio->ball_falls, 0);
 		}
 	}
-	
+
 	// funtion of highscore
 	if (score > highest_score) 
 	{
