@@ -51,7 +51,9 @@ public:
 	PhysBody* rightflippersmall;
 	PhysBody* leftflippersmall_joint;
 	PhysBody* rightflippersmall_joint;
-	
+	PhysBody* bouncerleft;
+
+
 	PhysBody* green_light;
 	PhysBody* red_light;
 	PhysBody* coin;

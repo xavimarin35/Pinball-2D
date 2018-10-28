@@ -366,6 +366,12 @@ bool ModuleSceneIntro::Start()
 	sensorgreenup2 = App->physics->CreateRectangleSensor(240, 39, 22, 22);
 	sensorgreenup2->listener = this;
 
+	
+	//bouncers stuff
+	bouncerleft = new PhysBody();
+	bouncerleft = App->physics->CreateCircle(300, 350, 25, b2_staticBody, false);
+	bouncerleft->listener = this;
+
 	return ret;
 }
 
