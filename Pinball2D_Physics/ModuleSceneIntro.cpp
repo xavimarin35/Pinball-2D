@@ -394,27 +394,12 @@ update_status ModuleSceneIntro::Update()
 	mouse.y = App->input->GetMouseY();
 
 	//Lights system
-	if (sensorgreenup2_active == true) {
+	if (sensorgreenup2_active == true) 
+	{
 		SDL_Rect greenRect = current_green_anim->GetCurrentFrame();
-		App->renderer->Blit(graphics, 235, 100, &greenRect, NULL);
-		//sensorgreenup2_active = false; 
-
-		//igual amb un SDL_GetTicks() de 2 segons li dius que sensorgreenup2_active = false i la animacio sen va.
-
-		//o potser aqui en el update fent un else if(sensorgreenup2_active = false){ desaparegui la imatge i la animacio amb 
-		//el touched_green_anim.Finished() o Reset() o ResetLoops() no se mira-ho <3
+		App->renderer->Blit(graphics, 91, -109, &greenRect, NULL);
 	}
-
-	/*int i = 0;
-	
-	for (p2List_item<greenlight*>* item = green_lights_list.getFirst(); item; item = item->next) {
-		if (item->data->sensor_green_active) {
-			item->data->sensor_green->GetPosition(x, y);
-			App->renderer->Blit(item->data->texture_green, x, y);
-			i++;
-		}
-	}*/
-
+	touched_green_anim.Finished();
 
 	// All draw functions ------------------------------------------------------
 	if (leftflipper != NULL)
@@ -459,12 +444,17 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
 	int x, y;
 
-	if (bodyA) 
+	if (bodyA == sensorgreenup2)
 	{
-		if (bodyA == sensorgreenup2) {
-			sensorgreenup2_active = true;
-			current_green_anim = &touched_green_anim;
-		}
+		sensorgreenup2_active = true;
+		App->player->score += 30;
+		current_green_anim = &touched_green_anim;
+	}
+
+	if (bodyA != sensorgreenup2) 
+	{
+		sensorgreenup2_active == false;
+		current_green_anim = &touched_green_anim;
 	}
 }
 
