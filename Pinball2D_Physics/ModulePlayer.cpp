@@ -47,8 +47,6 @@ bool ModulePlayer::CleanUp()
 
 	App->textures->Unload(ball_tex);
 
-
-
 	return true;
 }
 
@@ -66,7 +64,7 @@ update_status ModulePlayer::Update()
 		if (ballpos_y > SCREEN_HEIGHT) { finished_ball = true; }
 	}
 
-	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT && ball_launched == false)
+	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT && ball_launched == false && App->player->lifes != 0)
 	{
 		//Launch();
 		ball_launched = true;
@@ -114,20 +112,19 @@ update_status ModulePlayer::Update()
 		lifes--;
 
 		// games has finished completely
-		if (lifes < 0) 
+		if (lifes < 1) 
 		{
 			App->scene_intro->restart = true;
 			App->scene_intro->current_banner_anim = &App->scene_intro->banner_anim;
-
 		}
 		else {
 			App->audio->PlayFx(App->audio->ball_falls, 0);
 		}
-		
 	}
 	
 	// funtion of highscore
-	if (score > highest_score) {
+	if (score > highest_score) 
+	{
 		highest_score = score;
 	}
 
@@ -138,16 +135,9 @@ update_status ModulePlayer::Update()
 	return UPDATE_CONTINUE;
 }
 
-void ModulePlayer::OnCollision(PhysBody* bodyA, PhysBody* bodyB) {
+void ModulePlayer::OnCollision(PhysBody* bodyA, PhysBody* bodyB) 
+{
 
-	/*int x, y;
-
-	for (p2List_item<greenlight*>* item = App->scene_intro->green_lights_list.getFirst(); item; item = item->next) {
-		if (item->data->sensor_green == bodyB && bodyA == ball) {
-			item->data->sensor_green->GetPosition(x, y);
-			App->renderer->Blit(item->data->texture_green, x, y);
-		}
-	}*/
 }
 
 

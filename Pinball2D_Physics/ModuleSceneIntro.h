@@ -7,22 +7,6 @@
 
 class PhysBody;
 
-// struct of the light
-struct redlight {
-	SDL_Texture* texture_red = nullptr;
-	PhysBody* sensor_red = nullptr;
-	bool sensor_red_active = false;
-	//animation maybe too
-};
-
-struct greenlight {
-	SDL_Texture* texture_green = nullptr;
-	PhysBody* sensor_green = nullptr;
-	bool sensor_green_active = false;
-	// animation maybe too
-};
-
-
 class ModuleSceneIntro : public Module
 {
 public:
@@ -38,10 +22,6 @@ public:
 
 public:
 	p2List<PhysBody*> mapshapes;
-	
-	p2List<greenlight*> green_lights_list;
-	p2List<PhysBody*> red_lights;
-	p2List<PhysBody*> coins;
 	
 	PhysBody* leftflipper;
 	PhysBody* rightflipper;
@@ -93,7 +73,6 @@ public:
 	SDL_Texture* rightflippersmall_tex;
 	SDL_Texture* green_light_tex;
 	SDL_Texture* red_light_tex;
-	SDL_Texture* coin_tex;
 	SDL_Texture* graphics = nullptr;
 
 	Animation banner_anim;
@@ -102,8 +81,6 @@ public:
 	Animation* current_green_anim = nullptr;
 	Animation* current_bouncer_anim = nullptr;
 	Animation touched_red_anim;
-	Animation touched_coin_anim;
-	Animation coin_anim;
 	Animation green_light_anim;
 	Animation red_light_anim;
 		
