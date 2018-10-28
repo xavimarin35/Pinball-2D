@@ -397,8 +397,12 @@ update_status ModuleSceneIntro::Update()
 	if (sensorgreenup2_active == true) {
 		SDL_Rect greenRect = current_green_anim->GetCurrentFrame();
 		App->renderer->Blit(graphics, 235, 100, &greenRect, NULL);
-		//sensorgreenup2_active = false;
-		// polete perque no aparegui el error 
+		//sensorgreenup2_active = false; 
+
+		//igual amb un SDL_GetTicks() de 2 segons li dius que sensorgreenup2_active = false i la animacio sen va.
+
+		//o potser aqui en el update fent un else if(sensorgreenup2_active = false){ desaparegui la imatge i la animacio amb 
+		//el touched_green_anim.Finished() o Reset() o ResetLoops() no se mira-ho <3
 	}
 
 	/*int i = 0;
